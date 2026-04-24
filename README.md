@@ -3,7 +3,7 @@ A minimal and practical data movement tool built with Python.
 
 It is meant to demonstrate:
 
-* Call AWS cli programmatically
+* Call AWS CLI programmatically
 * Compute SHA-256 cecksums
 * Implement retry logic
 * Build a simple, intuitive command-line interface
