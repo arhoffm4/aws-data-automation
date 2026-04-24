@@ -1,12 +1,12 @@
 ## datamove
-A minimal, clean, and practical datamovement tool built with Python.
+A minimal and practical data movement tool built with Python.
 
-It demonstrates:
+It is meant to demonstrate:
 
-* Calling AWS ClI programmatically
-* Computing SHA-256 cecksums
-* Implementing retry logic
-* Building a simple, intuitive command-line interface
-* Organizing a Python project into clear, testable modules
+* Call AWS ClI programmatically
+* Compute SHA-256 cecksums
+* Implement retry logic
+* Build a simple, intuitive command-line interface
+* Organize a Python project into clear, testable modules
 
 
