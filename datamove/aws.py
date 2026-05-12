@@ -33,20 +33,19 @@ def aws_cp(
 def aws_ls(
 		uri: str,
 		profile: Optional[str] = None,
-		region: Optional[str = None
-		} -> Tuple[bool, str, str]:
+		region: Optional[str] = None
+		) -> Tuple[bool, str, str]:
 
-		"""
-		List S3 objects using 'aws s3 ls'
-		"""
+	"""
+	List S3 objects using 'aws s3 ls'
+	"""
+	cmd = ["aws", "s3", "ls", uri]
 
-		cmd = ["aws", "s3", "ls", uri]
+	if profile:
+		cmd += ["--profile", profile]
+	if region:
+		cmd += ["--region", region]
 
-		if profile:
-			cmd += ["--profile", profile]
-		if region:
-			cmd += ["--region", region]
-
-		return _run(cmd)
+	return _run(cmd)
 
 
