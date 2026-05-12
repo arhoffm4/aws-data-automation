@@ -6,7 +6,7 @@ setup(
 		description="Minimal data movement tool with AWS CLI integration and checksum verification",
 		author="Andrew Hoffman",
 		packages=find_packages(),
-		python_requires=">=3.8",
+		python_requires=">=3.7",
 		install_requires=[],
 		entry_points={
 			"console_scripts": [
