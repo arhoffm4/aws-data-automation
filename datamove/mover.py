@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Tuple
+import shutil
 
 from .logger import get_logger
 from .checksum import sha256sum
@@ -23,7 +24,7 @@ class DataMover:
 	
 
 	def __post_init__(self):
-		self.logeer = get_logger(self.logger_name)
+		self.logger = get_logger(self.logger_name)
 
 	def move(self, src: str, dst: str) -> bool:
 		self.logger.info(f"Starting transfer: {src} -> {dst}")
@@ -64,7 +65,16 @@ class DataMover:
 			self.logger.warning(f"Transfer {attempt} failed: {err.strip()}")
 		return False
 
-	def _transfer_once(sef, src: str, dst: str):
+	def _transfer_once(self, src: str, dst: str) -> Tuple[bool, str, str]:
+
+		# local -> local
+		if is_local_path(src) and is_local_path(dst):
+			try:
+				shutil.copy2(src, dst)
+				return True, f"Copied {src} -> {dst}", ""
+			except Exception as e:
+				return False, "", str(e)
+
 		# local -> S3 
 		if is_local_path(src) and is_s3_path(dst):
 			return aws_cp(src, dst)
@@ -74,6 +84,6 @@ class DataMover:
 			return aws_cp(src, dst)
 
 		# local -> local placeholder
-		self.logger.error("Local -> local tranfer not implemented yet")
+		self.logger.error("Local -> local transfer not implemented yet")
 		return False, "", "local-local not implemented"
 					
