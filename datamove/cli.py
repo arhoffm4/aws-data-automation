@@ -18,14 +18,18 @@ def build_parser() -> argparse.ArgumentParser:
 			description="Data movement with checksum verification"
 			)
 
+
+
 	sub = parser.add_subparsers(dest="command", required=True)
 
-	"""
-	-----------------
-	datamove SRC DST
-	-----------------
-	"""
-	verify = sub.add_parser("verify", help="Compute SHA-256 cehcksum of a local file")
+
+	# --- datamove move SRC DST --- 
+	move = sub.add_parser("move", help="Move data between local and S3")
+	move.add_argument("src", help="Source path (local or s3://)")
+	move.add_argument("dst", help="Destination path (local or s3://)")
+	
+	# --- datamove verify FILE ---
+	verify = sub.add_parser("verify", help="Compute SHA-256 checksum of a local file")
 	verify.add_argument("path", help="Local file path")
 
 	return parser
@@ -62,7 +66,7 @@ if __name__ == "__main__":
 
 
 
-using argparse:
-datamove move localfile.txt s3://bucket/path/
-datamove move s3://bucket/file localfile.txt
-datamove verify localfile.txt
+# using argparse:
+# datamove move localfile.txt s3://bucket/path/
+# datamove move s3://bucket/file localfile.txt
+# datamove verify localfile.txt
